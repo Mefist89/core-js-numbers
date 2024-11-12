@@ -50,9 +50,10 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return (value1 + value2) / 2;
+  const sum = value1 + value2;
+  if (sum > Number.MAX_VALUE) return Number.MAX_VALUE;
+  return sum / 2;
 }
-
 /**
  * Returns a distance between two points by cartesian coordinates.
  *
@@ -139,8 +140,8 @@ function getLastDigit(value) {
  *     '37'     => 37
  * '-525.5'     => -525.5
  */
-function parseNumberFromString(/* value */) {
-  throw new Error('Not implemented');
+function parseNumberFromString(value) {
+  return Number(value);
 }
 
 /**
@@ -156,10 +157,9 @@ function parseNumberFromString(/* value */) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelepipedDiagonal(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getParallelepipedDiagonal(a, b, c) {
+  return (a ** 2 + b ** 2 + c ** 2) ** 0.5;
 }
-
 /**
  * Returns the number rounded to specified power of 10.
  *
@@ -177,10 +177,12 @@ function getParallelepipedDiagonal(/* a, b, c */) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  const d = Number.parseInt(num / 10 ** pow, 10);
+  const r = num % 10 ** pow;
+  if (r > 5 * 10 ** (pow - 1)) return (d + 1) * 10 ** pow;
+  return d * 10 ** pow;
 }
-
 /**
  * Returns true is the number is prime; otherwise false.
  * See: https://en.wikipedia.org/wiki/Primality_test
